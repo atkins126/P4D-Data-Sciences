@@ -1,3 +1,14 @@
+(********************************************************
+ * Part of Python for Delphi - Data Sciences libraries  *
+ *                                                      *
+ * Copyright (c) 2022 by Embarcadero Technologies       *
+ * Licensed under the MIT License                       *
+ *                                                      *
+ * For full license text and more information visit:    *
+ * https://github.com/Embarcadero/P4D-Data-Sciences     *
+ ********************************************************)
+
+
 unit nltk1_main;
 
 interface
@@ -21,11 +32,14 @@ type
     lbMsg: TLabel;
     lbDesc: TLabel;
     Memo1: TMemo;
-    ListBox1: TListBox;
-    ListBox2: TListBox;
-    ListBox3: TListBox;
+    lbTokens: TListBox;
+    lbTagged: TListBox;
+    lbEntities: TListBox;
     AniIndicator1: TAniIndicator;
     NumPy1: TNumPy;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure PyEmbeddedResEnvironment3101AfterActivate(Sender: TObject;
       const APythonVersion: string; const AActivated: Boolean);
@@ -87,13 +101,13 @@ begin
     nltk.download('treebank');
 
     var tokens := nltk.word_tokenize(memo1.lines.Text);
-    VarPyToStrings(tokens, ListBox1.Items);
+    VarPyToStrings(tokens, lbTokens.Items);
 
     var tagged := nltk.pos_tag(tokens);
-    VarPyToStrings(tagged, ListBox2.Items);
+    VarPyToStrings(tagged, lbTagged.Items);
 
     var entities := nltk.chunk.ne_chunk(tagged);
-    VarPyToStrings(entities, ListBox3.Items);
+    VarPyToStrings(entities, lbEntities.Items);
     var t := nltk.corpus.treebank.parsed_sents('wsj_0001.mrg');
     for var i in VarPyIterate(t) do
      // i.draw(); // Requires Tkinter....

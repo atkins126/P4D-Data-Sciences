@@ -1,32 +1,14 @@
-(**************************************************************************)
-(*                                                                        *)
-(* Module:  Unit 'MainForm'      Copyright (c) 2021                       *)
-(*                                                                        *)
-(*                               Lucas Moura Belo - lmbelo                *)
-(*                               lucas.belo@live.com                      *)
-(*                               Brazil                                   *)
-(*                                                                        *)
-(*  Project page:                https://github.com/lmbelo/P4D_AI_ML      *)
-(**************************************************************************)
-(*  Functionality:  MatplotLib Examples Gallery with P4D                  *)
-(*                                                                        *)
-(*                                                                        *)
-(**************************************************************************)
-(* This source code is distributed with no WARRANTY, for no reason or use.*)
-(* Everyone is allowed to use and change this code free for his own tasks *)
-(* and projects, as long as this header and its copyright text is intact. *)
-(* For changed versions of this code, which are public distributed the    *)
-(* following additional conditions have to be fullfilled:                 *)
-(* 1) The header has to contain a comment on the change and the author of *)
-(*    it.                                                                 *)
-(* 2) A copy of the changed source has to be sent to the above E-Mail     *)
-(*    address or my then valid address, if this is possible to the        *)
-(*    author.                                                             *)
-(* The second condition has the target to maintain an up to date central  *)
-(* version of the component. If this condition is not acceptable for      *)
-(* confidential or legal reasons, everyone is free to derive a component  *)
-(* or to generate a diff file to my or other original sources.            *)
-(**************************************************************************)
+(********************************************************
+ * Part of Python for Delphi - Data Sciences libraries  *
+ *                                                      *
+ * Copyright (c) 2022 by Embarcadero Technologies       *
+ * Licensed under the MIT License                       *
+ *                                                      *
+ * For full license text and more information visit:    *
+ * https://github.com/Embarcadero/P4D-Data-Sciences     *
+ ********************************************************)
+
+
 unit MainForm;
 
 interface
@@ -36,7 +18,9 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Memo.Types,
   PyCommon, PyModule, MatplotLib, PythonEngine, FMX.PythonGUIInputOutput,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, NumPy, FMX.StdCtrls,
-  FMX.Layouts, PyPackage, System.Generics.Collections;
+  FMX.Layouts, PyPackage, System.Generics.Collections, PyEnvironment,
+  PyEnvironment.Embeddable, PyEnvironment.Embeddable.Res,
+  PyEnvironment.Embeddable.Res.Python310;
 
 type
   TForm1 = class(TForm)
@@ -49,6 +33,7 @@ type
     btnScatterMasked: TButton;
     btnScatterSymbol: TButton;
     btnInterpolations: TButton;
+    PyEmbeddedResEnvironment3101: TPyEmbeddedResEnvironment310;
     procedure btnScatterMaskedClick(Sender: TObject);
     procedure btnScatterSymbolClick(Sender: TObject);
     procedure btnInterpolationsClick(Sender: TObject);
