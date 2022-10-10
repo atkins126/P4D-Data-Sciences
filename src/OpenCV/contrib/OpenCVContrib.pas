@@ -8,7 +8,8 @@
  * https://github.com/Embarcadero/P4D-Data-Sciences     *
  ********************************************************)
 
-unit MatplotLib;
+
+unit OpenCVContrib;
 
 interface
 
@@ -17,37 +18,32 @@ uses
 
 type
   [ComponentPlatforms(pidAllPlatforms)]
-  TMatplotLib = class(TPyManagedPackage)
+  TOpenCVContrib = class(TPyManagedPackage)
   private
-    function GetPyPlot: variant;
     function AsVariant: variant;
   protected
     procedure Prepare(const AModel: TPyPackageModel); override;
     procedure ImportModule; override;
   public
-    property matplot: variant read AsVariant;
-    property plt: variant read GetPyPlot;
+    property cv2: variant read AsVariant;
   end;
 
 implementation
 
 uses
-  PyPackage.Manager.ManagerKind, PyPackage.Manager.Pip,
-  VarPyth, System.Variants;
+  System.Variants,
+  PyPackage.Manager.ManagerKind,
+  PyPackage.Manager.Pip,
+  PyPackage.Manager.Conda;
 
-{ TMatplotLib }
+{ TOpenCVContrib }
 
-function TMatplotLib.AsVariant: variant;
+function TOpenCVContrib.AsVariant: variant;
 begin
   Result := inherited;
 end;
 
-function TMatplotLib.GetPyPlot: variant;
-begin
-  Result := PyModule['pyplot'].AsVariant();
-end;
-
-procedure TMatplotLib.ImportModule;
+procedure TOpenCVContrib.ImportModule;
 begin
   MaskFPUExceptions(true);
   try
@@ -57,14 +53,19 @@ begin
   end;
 end;
 
-procedure TMatplotLib.Prepare(const AModel: TPyPackageModel);
+procedure TOpenCVContrib.Prepare(const AModel: TPyPackageModel);
 begin
   inherited;
   with AModel do begin
-    PackageName := 'matplotlib';
+    PackageName := 'cv2';
+    //NumPy from PIP
     PackageManagers.Add(
       TPyPackageManagerKind.pip,
-      TPyPackageManagerPip.Create('matplotlib'));
+      TPyPackageManagerPip.Create('opencv-contrib-python'));
+    //NumPy from Conda
+    PackageManagers.Add(
+      TPyPackageManagerKind.conda,
+      TPyPackageManagerConda.Create('opencv-contrib-python'));
   end;
 end;
 

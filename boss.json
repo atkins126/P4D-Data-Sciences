@@ -4,10 +4,31 @@
 	"version": "1.0.0",
 	"homepage": "https://github.com/Embarcadero/P4D-Data-Sciences",
 	"mainsrc": "./src",
-	"projects": [],
+	"projects": [
+		"./src/Keras/dclP4DKeras.dproj",
+		"./src/Keras/P4DKeras.dproj",
+		"./src/MatplotLib/dclP4DMatplotLib.dproj",
+		"./src/MatplotLib/P4DMatplotLib.dproj",
+		"./src/NLTK/dclP4DNLTK.dproj",
+		"./src/NLTK/P4DNLTK.dproj",
+		"./src/NumPy/dclP4DNumPy.dproj",
+		"./src/NumPy/P4DNumPy.dproj",
+		"./src/ONNXRuntime/dclP4DONNXRuntime.dproj",
+		"./src/ONNXRuntime/P4DONNXRuntime.dproj",
+		"./src/OpenCV/dclP4DOpenCV.dproj",
+		"./src/OpenCV/P4DOpenCV.dproj",
+		"./src/Pandas/dclP4DPandas.dproj",
+		"./src/Pandas/P4DPandas.dproj",
+		"./src/PyTorch/dclP4DPyTorch.dproj",
+		"./src/PyTorch/P4DPyTorch.dproj",
+		"./src/ScikitLearn/dclP4DScikitLearn.dproj",
+		"./src/ScikitLearn/P4DScikitLearn.dproj",
+		"./src/SciPy/dclP4DSciPy.dproj",
+		"./src/SciPy/P4DSciPy.dproj",
+		"./src/TensorFlow/dclP4DTensorFlow.dproj",
+		"./src/TensorFlow/P4DTensorFlow.dproj"
+	],
 	"dependencies": {
-		"https://github.com/embarcadero/lightweight-python-wrappers": "^v0.0.1-alpha",
-		"https://github.com/embarcadero/python4delphi": "^1.1",
-		"https://github.com/embarcadero/pythonenviroments": "^v0.0.1-alpha"
+		"https://github.com/embarcadero/lightweight-python-wrappers": "^v0.0.1-alpha"
 	}
 }

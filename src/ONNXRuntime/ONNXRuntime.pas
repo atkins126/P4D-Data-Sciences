@@ -8,7 +8,8 @@
  * https://github.com/Embarcadero/P4D-Data-Sciences     *
  ********************************************************)
 
-unit MatplotLib;
+
+unit ONNXRuntime;
 
 interface
 
@@ -17,37 +18,32 @@ uses
 
 type
   [ComponentPlatforms(pidAllPlatforms)]
-  TMatplotLib = class(TPyManagedPackage)
+  TONNXRuntime = class(TPyManagedPackage)
   private
-    function GetPyPlot: variant;
     function AsVariant: variant;
   protected
     procedure Prepare(const AModel: TPyPackageModel); override;
     procedure ImportModule; override;
   public
-    property matplot: variant read AsVariant;
-    property plt: variant read GetPyPlot;
+    property onnx: variant read AsVariant;
   end;
 
 implementation
 
 uses
-  PyPackage.Manager.ManagerKind, PyPackage.Manager.Pip,
-  VarPyth, System.Variants;
+  System.Variants,
+  PyPackage.Manager.ManagerKind,
+  PyPackage.Manager.Pip,
+  PyPackage.Manager.Conda;
 
-{ TMatplotLib }
+{ TONNXRuntime }
 
-function TMatplotLib.AsVariant: variant;
+function TONNXRuntime.AsVariant: variant;
 begin
   Result := inherited;
 end;
 
-function TMatplotLib.GetPyPlot: variant;
-begin
-  Result := PyModule['pyplot'].AsVariant();
-end;
-
-procedure TMatplotLib.ImportModule;
+procedure TONNXRuntime.ImportModule;
 begin
   MaskFPUExceptions(true);
   try
@@ -57,14 +53,19 @@ begin
   end;
 end;
 
-procedure TMatplotLib.Prepare(const AModel: TPyPackageModel);
+procedure TONNXRuntime.Prepare(const AModel: TPyPackageModel);
 begin
   inherited;
   with AModel do begin
-    PackageName := 'matplotlib';
+    PackageName := 'onnxruntime';
+    //NumPy from PIP
     PackageManagers.Add(
       TPyPackageManagerKind.pip,
-      TPyPackageManagerPip.Create('matplotlib'));
+      TPyPackageManagerPip.Create('onnxruntime'));
+    //NumPy from Conda
+    PackageManagers.Add(
+      TPyPackageManagerKind.conda,
+      TPyPackageManagerConda.Create('onnxruntime'));
   end;
 end;
 
